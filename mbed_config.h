@@ -23,8 +23,7 @@
 
 // Configuration parameters
 #define CLOCK_SOURCE                                                          USE_PLL_MSI                                                                                      // set by target:DISCO_L475VG_IOT01A
-#define LPTICKER_DELAY_TICKS                                                  3                                                                                                // set by target:DISCO_L475VG_IOT01A
-#define MBED_CONF_APP_API_KEY                                                 "WRITE API KEY"                                                                                  // set by application
+#define LPTICKER_DELAY_TICKS                                                  3                                                                                                // set by target:DISCO_L475VG_IOT01A                                                                               // set by application
 #define MBED_CONF_APP_WIFI_PASSWORD                                           "8220044168"                                                                                     // set by application
 #define MBED_CONF_APP_WIFI_SHIELD                                             WIFI_ISM43362                                                                                    // set by application
 #define MBED_CONF_APP_WIFI_SSID                                               "Rajarajan"                                                                                      // set by application
