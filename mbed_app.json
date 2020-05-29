@@ -13,10 +13,6 @@
             "help": "WiFi Password",
             "value": "\"8220044168\""
         },
-        "api-key":{
-            "help":  "REST API Key for Treasure Data",
-            "value": "\"WRITE API KEY\""
-        }
     },
     "target_overrides": {
         "*": {
