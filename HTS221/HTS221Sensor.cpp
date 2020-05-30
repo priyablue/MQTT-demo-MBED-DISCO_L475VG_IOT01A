@@ -44,10 +44,10 @@
 
 /* Class Implementation ------------------------------------------------------*/
 
-HTS221Sensor::HTS221Sensor(SPI *spi, PinName cs_pin, PinName drdy_pin) : 
-                           _dev_spi(spi), _cs_pin(cs_pin), _drdy_pin(drdy_pin)  // SPI3W ONLY
-{    
-    assert(spi); 
+HTS221Sensor::HTS221Sensor(SPI *spi, PinName cs_pin, PinName drdy_pin) :
+    _dev_spi(spi), _cs_pin(cs_pin), _drdy_pin(drdy_pin)  // SPI3W ONLY
+{
+    assert(spi);
     _dev_i2c = NULL;
 };
 
@@ -56,7 +56,7 @@ HTS221Sensor::HTS221Sensor(SPI *spi, PinName cs_pin, PinName drdy_pin) :
  * @param address the address of the component's instance
  */
 HTS221Sensor::HTS221Sensor(DevI2C *i2c, uint8_t address, PinName drdy_pin) :
-                           _dev_i2c(i2c), _address(address), _cs_pin(NC), _drdy_pin(drdy_pin)
+    _dev_i2c(i2c), _address(address), _cs_pin(NC), _drdy_pin(drdy_pin)
 {
     assert(i2c);
     _dev_spi = NULL;
@@ -69,24 +69,21 @@ HTS221Sensor::HTS221Sensor(DevI2C *i2c, uint8_t address, PinName drdy_pin) :
  */
 int HTS221Sensor::init(void *init)
 {
-  /* Power down the device */
-  if ( HTS221_DeActivate( (void *)this ) == HTS221_ERROR )
-  {
-    return 1;
-  }
+    /* Power down the device */
+    if (HTS221_DeActivate((void *)this) == HTS221_ERROR) {
+        return 1;
+    }
 
-  /* Enable BDU */
-  if ( HTS221_Set_BduMode( (void *)this, HTS221_ENABLE ) == HTS221_ERROR )
-  {
-    return 1;
-  }
-  
-  if(set_odr(1.0f) == 1)
-  {
-    return 1;
-  }
-  
-  return 0;
+    /* Enable BDU */
+    if (HTS221_Set_BduMode((void *)this, HTS221_ENABLE) == HTS221_ERROR) {
+        return 1;
+    }
+
+    if (set_odr(1.0f) == 1) {
+        return 1;
+    }
+
+    return 0;
 }
 
 /**
@@ -95,13 +92,12 @@ int HTS221Sensor::init(void *init)
  */
 int HTS221Sensor::enable(void)
 {
-  /* Power up the device */
-  if ( HTS221_Activate( (void *)this ) == HTS221_ERROR )
-  {
-    return 1;
-  }
+    /* Power up the device */
+    if (HTS221_Activate((void *)this) == HTS221_ERROR) {
+        return 1;
+    }
 
-  return 0;
+    return 0;
 }
 
 /**
@@ -110,13 +106,12 @@ int HTS221Sensor::enable(void)
  */
 int HTS221Sensor::disable(void)
 {
-  /* Power up the device */
-  if ( HTS221_DeActivate( (void *)this ) == HTS221_ERROR )
-  {
-    return 1;
-  }
+    /* Power up the device */
+    if (HTS221_DeActivate((void *)this) == HTS221_ERROR) {
+        return 1;
+    }
 
-  return 0;
+    return 0;
 }
 
 /**
@@ -126,18 +121,16 @@ int HTS221Sensor::disable(void)
  */
 int HTS221Sensor::read_id(uint8_t *id)
 {
-  if(!id)
-  { 
-    return 1;
-  }
-  
-  /* Read WHO AM I register */
-  if ( HTS221_Get_DeviceID( (void *)this, id ) == HTS221_ERROR )
-  {
-    return 1;
-  }
+    if (!id) {
+        return 1;
+    }
 
-  return 0;
+    /* Read WHO AM I register */
+    if (HTS221_Get_DeviceID((void *)this, id) == HTS221_ERROR) {
+        return 1;
+    }
+
+    return 0;
 }
 
 /**
@@ -150,20 +143,18 @@ int HTS221Sensor::reset(void)
     uint8_t tmpreg;
 
     /* Read CTRL_REG2 register */
-    if (read_reg(HTS221_CTRL_REG2, &tmpreg) != 0)
-    {
-      return 1;
+    if (read_reg(HTS221_CTRL_REG2, &tmpreg) != 0) {
+        return 1;
     }
 
     /* Enable or Disable the reboot memory */
     tmpreg |= (0x01 << HTS221_BOOT_BIT);
 
     /* Write value to MEMS CTRL_REG2 regsister */
-    if (write_reg(HTS221_CTRL_REG2, tmpreg) != 0)
-    {
-      return 1;
+    if (write_reg(HTS221_CTRL_REG2, tmpreg) != 0) {
+        return 1;
     }
-    
+
     return 0;
 }
 
@@ -172,19 +163,18 @@ int HTS221Sensor::reset(void)
  * @param  pfData the pointer to data output
  * @retval 0 in case of success, an error code otherwise
  */
-int HTS221Sensor::get_humidity(float* pfData)
+int HTS221Sensor::get_humidity(float *pfData)
 {
-  uint16_t uint16data = 0;
+    uint16_t uint16data = 0;
 
-  /* Read data from HTS221. */
-  if ( HTS221_Get_Humidity( (void *)this, &uint16data ) == HTS221_ERROR )
-  {
-    return 1;
-  }
+    /* Read data from HTS221. */
+    if (HTS221_Get_Humidity((void *)this, &uint16data) == HTS221_ERROR) {
+        return 1;
+    }
 
-  *pfData = ( float )uint16data / 10.0f;
+    *pfData = (float)uint16data / 10.0f;
 
-  return 0;
+    return 0;
 }
 
 /**
@@ -192,19 +182,18 @@ int HTS221Sensor::get_humidity(float* pfData)
  * @param  pfData the pointer to data output
  * @retval 0 in case of success, an error code otherwise
  */
-int HTS221Sensor::get_temperature(float* pfData)
+int HTS221Sensor::get_temperature(float *pfData)
 {
-  int16_t int16data = 0;
+    int16_t int16data = 0;
 
-  /* Read data from HTS221. */
-  if ( HTS221_Get_Temperature( (void *)this, &int16data ) == HTS221_ERROR )
-  {
-    return 1;
-  }
+    /* Read data from HTS221. */
+    if (HTS221_Get_Temperature((void *)this, &int16data) == HTS221_ERROR) {
+        return 1;
+    }
 
-  *pfData = ( float )int16data / 10.0f;
+    *pfData = (float)int16data / 10.0f;
 
-  return 0;
+    return 0;
 }
 
 /**
@@ -212,35 +201,33 @@ int HTS221Sensor::get_temperature(float* pfData)
  * @param  odr the pointer to the output data rate
  * @retval 0 in case of success, an error code otherwise
  */
-int HTS221Sensor::get_odr(float* odr)
+int HTS221Sensor::get_odr(float *odr)
 {
-  HTS221_Odr_et odr_low_level;
+    HTS221_Odr_et odr_low_level;
 
-  if ( HTS221_Get_Odr( (void *)this, &odr_low_level ) == HTS221_ERROR )
-  {
-    return 1;
-  }
+    if (HTS221_Get_Odr((void *)this, &odr_low_level) == HTS221_ERROR) {
+        return 1;
+    }
 
-  switch( odr_low_level )
-  {
-    case HTS221_ODR_ONE_SHOT:
-      *odr =  0.0f;
-      break;
-    case HTS221_ODR_1HZ     :
-      *odr =  1.0f;
-      break;
-    case HTS221_ODR_7HZ     :
-      *odr =  7.0f;
-      break;
-    case HTS221_ODR_12_5HZ  :
-      *odr = 12.5f;
-      break;
-    default                 :
-      *odr = -1.0f;
-      return 1;
-  }
+    switch (odr_low_level) {
+        case HTS221_ODR_ONE_SHOT:
+            *odr =  0.0f;
+            break;
+        case HTS221_ODR_1HZ     :
+            *odr =  1.0f;
+            break;
+        case HTS221_ODR_7HZ     :
+            *odr =  7.0f;
+            break;
+        case HTS221_ODR_12_5HZ  :
+            *odr = 12.5f;
+            break;
+        default                 :
+            *odr = -1.0f;
+            return 1;
+    }
 
-  return 0;
+    return 0;
 }
 
 /**
@@ -250,18 +237,17 @@ int HTS221Sensor::get_odr(float* odr)
  */
 int HTS221Sensor::set_odr(float odr)
 {
-  HTS221_Odr_et new_odr;
+    HTS221_Odr_et new_odr;
 
-  new_odr = ( odr <= 1.0f ) ? HTS221_ODR_1HZ
-          : ( odr <= 7.0f ) ? HTS221_ODR_7HZ
-          :                   HTS221_ODR_12_5HZ;
+    new_odr = (odr <= 1.0f) ? HTS221_ODR_1HZ
+              : (odr <= 7.0f) ? HTS221_ODR_7HZ
+              :                   HTS221_ODR_12_5HZ;
 
-  if ( HTS221_Set_Odr( (void *)this, new_odr ) == HTS221_ERROR )
-  {
-    return 1;
-  }
+    if (HTS221_Set_Odr((void *)this, new_odr) == HTS221_ERROR) {
+        return 1;
+    }
 
-  return 0;
+    return 0;
 }
 
 
@@ -272,15 +258,14 @@ int HTS221Sensor::set_odr(float odr)
  * @retval 0 in case of success
  * @retval 1 in case of failure
  */
-int HTS221Sensor::read_reg( uint8_t reg, uint8_t *data )
+int HTS221Sensor::read_reg(uint8_t reg, uint8_t *data)
 {
 
-  if ( HTS221_read_reg( (void *)this, reg, 1, data ) == HTS221_ERROR )
-  {
-    return 1;
-  }
+    if (HTS221_read_reg((void *)this, reg, 1, data) == HTS221_ERROR) {
+        return 1;
+    }
 
-  return 0;
+    return 0;
 }
 
 /**
@@ -290,23 +275,22 @@ int HTS221Sensor::read_reg( uint8_t reg, uint8_t *data )
  * @retval 0 in case of success
  * @retval 1 in case of failure
  */
-int HTS221Sensor::write_reg( uint8_t reg, uint8_t data )
+int HTS221Sensor::write_reg(uint8_t reg, uint8_t data)
 {
 
-  if ( HTS221_write_reg( (void *)this, reg, 1, &data ) == HTS221_ERROR )
-  {
-    return 1;
-  }
+    if (HTS221_write_reg((void *)this, reg, 1, &data) == HTS221_ERROR) {
+        return 1;
+    }
 
-  return 0;
+    return 0;
 }
 
-uint8_t HTS221_io_write( void *handle, uint8_t WriteAddr, uint8_t *pBuffer, uint16_t nBytesToWrite )
+uint8_t HTS221_io_write(void *handle, uint8_t WriteAddr, uint8_t *pBuffer, uint16_t nBytesToWrite)
 {
-  return ((HTS221Sensor *)handle)->io_write(pBuffer, WriteAddr, nBytesToWrite);
+    return ((HTS221Sensor *)handle)->io_write(pBuffer, WriteAddr, nBytesToWrite);
 }
 
-uint8_t HTS221_io_read( void *handle, uint8_t ReadAddr, uint8_t *pBuffer, uint16_t nBytesToRead )
+uint8_t HTS221_io_read(void *handle, uint8_t ReadAddr, uint8_t *pBuffer, uint16_t nBytesToRead)
 {
-  return ((HTS221Sensor *)handle)->io_read(pBuffer, ReadAddr, nBytesToRead);
+    return ((HTS221Sensor *)handle)->io_read(pBuffer, ReadAddr, nBytesToRead);
 }

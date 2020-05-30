@@ -1,4 +1,5 @@
-/* Example program for MQTT with Thingsboard (demo.thingsboard.io) & DISCO_L475VG_IOT01 board */
+/* WiFi+MQTT Example
+  */
 
 #include "mbed.h"
 #include "TCPSocket.h"
@@ -10,22 +11,22 @@
 #include "MQTTClient.h"
 #include "HTS221Sensor.h"
 #define MQTT_HOST               "demo.thingsboard.io"
-//#define MQTT_HOST               "192.168.43.14"
 #define MQTT_PORT               1883
 #define MQTT_TOPIC              "v1/devices/me/telemetry"
 #include <string>
+
 ISM43362Interface net;
 
 void messageArrived(MQTT::MessageData& md)
-{  int arrivedcount =0;
-   MQTT::Message &message = md.message;
-   logMessage("Message arrived: qos %d, retained %d, dup %d, packetid %d\r\n", message.qos, message.retained, message.dup, message.id);
-   logMessage("Payload %.*s\r\n", message.payloadlen, (char*)message.payload);
-   ++arrivedcount;
+{
+    MQTT::Message &message = md.message;
+    logMessage("Message arrived: qos %d, retained %d, dup %d, packetid %d\r\n", message.qos, message.retained, message.dup, message.id);
+    logMessage("Payload %.*s\r\n", message.payloadlen, (char*)message.payload);
+    //++arrivedcount;
 }
 
-
 int main(void){
+   
     printf("\r\nBluetronics - WiFi+MQTT Example Demo\n");
 
     // Connect to Wifi
@@ -44,12 +45,8 @@ int main(void){
     printf("RSSI: %d\n\n", net.get_rssi());
 
     printf("\Wifi Example Done,MQTT Example Start\n");
-    
-    // MQTT Example Start
   
-    char* publishtopic = "v1/devices/me/telemetry";
-    char* subscribetopic = "subscribtest";
-      char assess_token[] = "GlQH3wvUfpEFM9EYabgO";
+    char assess_token[] = "GlQH3wvUfpEFM9EYabgO";
     NetworkInterface* network = &net;
     if (!network) {
         return -1;
@@ -67,20 +64,13 @@ int main(void){
         logMessage("rc from TCP connect is %d\r\n", rc);
 
     MQTTPacket_connectData data = MQTTPacket_connectData_initializer;
-    data.MQTTVersion = 3;
-    data.clientID.cstring = "mbed-sample";
+    //data.MQTTVersion = 3;
+    data.clientID.cstring = "Bluetronics-MQTT-Demo";
     data.username.cstring = assess_token;
-    data.password.cstring = "";
+    //data.password.cstring = "";
     if ((rc = client.connect(data)) != 0)
         logMessage("rc from MQTT connect is %d\r\n", rc);
-
-    //if ((rc = client.subscribe(publishtopic, MQTT::QOS2, messageArrived)) != 0)
-    //    logMessage("rc from MQTT subscribe is %d\r\n", rc);
-   // if ((rc = client.subscribe(subscribetopic, MQTT::QOS2, messageArrived)) != 0)
-    //    logMessage("rc from MQTT subscribe is %d\r\n", rc);
-   
-
-    
+ 
     printf("successfully connect!\n\n");
     
     // Initialize sensors --------------------------------------------------

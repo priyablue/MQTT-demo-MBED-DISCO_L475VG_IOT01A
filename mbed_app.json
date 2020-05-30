@@ -13,6 +13,10 @@
             "help": "WiFi Password",
             "value": "\"8220044168\""
         },
+        "api-key":{
+            "help":  "access token",
+            "value": "\"GlQH3wvUfpEFM9EYabgO\""
+        }
     },
     "target_overrides": {
         "*": {

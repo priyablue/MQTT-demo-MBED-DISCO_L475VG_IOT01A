@@ -60,7 +60,7 @@ extern "C" {
 */
 #define HTS221_assert_param(expr) ((expr) ? (void)0 : HTS221_assert_failed((uint8_t *)__FILE__, __LINE__))
 /* Exported functions ------------------------------------------------------- */
-void HTS221_assert_failed(uint8_t* file, uint32_t line);
+void HTS221_assert_failed(uint8_t *file, uint32_t line);
 #else
 #define HTS221_assert_param(expr) ((void)0)
 #endif /* USE_FULL_ASSERT_HTS221 */
@@ -99,16 +99,15 @@ typedef enum {HTS221_RESET = (uint8_t)0, HTS221_SET = !HTS221_RESET} HTS221_BitS
 /**
 * @brief  Humidity average.
 */
-typedef enum
-{
-  HTS221_AVGH_4         = (uint8_t)0x00,         /*!< Internal average on 4 samples */
-  HTS221_AVGH_8         = (uint8_t)0x01,         /*!< Internal average on 8 samples */
-  HTS221_AVGH_16        = (uint8_t)0x02,         /*!< Internal average on 16 samples */
-  HTS221_AVGH_32        = (uint8_t)0x03,         /*!< Internal average on 32 samples */
-  HTS221_AVGH_64        = (uint8_t)0x04,         /*!< Internal average on 64 samples */
-  HTS221_AVGH_128       = (uint8_t)0x05,         /*!< Internal average on 128 samples */
-  HTS221_AVGH_256       = (uint8_t)0x06,         /*!< Internal average on 256 samples */
-  HTS221_AVGH_512       = (uint8_t)0x07          /*!< Internal average on 512 samples */
+typedef enum {
+    HTS221_AVGH_4         = (uint8_t)0x00,         /*!< Internal average on 4 samples */
+    HTS221_AVGH_8         = (uint8_t)0x01,         /*!< Internal average on 8 samples */
+    HTS221_AVGH_16        = (uint8_t)0x02,         /*!< Internal average on 16 samples */
+    HTS221_AVGH_32        = (uint8_t)0x03,         /*!< Internal average on 32 samples */
+    HTS221_AVGH_64        = (uint8_t)0x04,         /*!< Internal average on 64 samples */
+    HTS221_AVGH_128       = (uint8_t)0x05,         /*!< Internal average on 128 samples */
+    HTS221_AVGH_256       = (uint8_t)0x06,         /*!< Internal average on 256 samples */
+    HTS221_AVGH_512       = (uint8_t)0x07          /*!< Internal average on 512 samples */
 } HTS221_Avgh_et;
 #define IS_HTS221_AVGH(AVGH) ((AVGH == HTS221_AVGH_4) || (AVGH == HTS221_AVGH_8) || \
                               (AVGH == HTS221_AVGH_16) || (AVGH == HTS221_AVGH_32) || \
@@ -118,16 +117,15 @@ typedef enum
 /**
 * @brief  Temperature average.
 */
-typedef enum
-{
-  HTS221_AVGT_2         = (uint8_t)0x00,        /*!< Internal average on 2 samples */
-  HTS221_AVGT_4         = (uint8_t)0x08,        /*!< Internal average on 4 samples */
-  HTS221_AVGT_8         = (uint8_t)0x10,        /*!< Internal average on 8 samples */
-  HTS221_AVGT_16        = (uint8_t)0x18,        /*!< Internal average on 16 samples */
-  HTS221_AVGT_32        = (uint8_t)0x20,        /*!< Internal average on 32 samples */
-  HTS221_AVGT_64        = (uint8_t)0x28,        /*!< Internal average on 64 samples */
-  HTS221_AVGT_128       = (uint8_t)0x30,        /*!< Internal average on 128 samples */
-  HTS221_AVGT_256       = (uint8_t)0x38         /*!< Internal average on 256 samples */
+typedef enum {
+    HTS221_AVGT_2         = (uint8_t)0x00,        /*!< Internal average on 2 samples */
+    HTS221_AVGT_4         = (uint8_t)0x08,        /*!< Internal average on 4 samples */
+    HTS221_AVGT_8         = (uint8_t)0x10,        /*!< Internal average on 8 samples */
+    HTS221_AVGT_16        = (uint8_t)0x18,        /*!< Internal average on 16 samples */
+    HTS221_AVGT_32        = (uint8_t)0x20,        /*!< Internal average on 32 samples */
+    HTS221_AVGT_64        = (uint8_t)0x28,        /*!< Internal average on 64 samples */
+    HTS221_AVGT_128       = (uint8_t)0x30,        /*!< Internal average on 128 samples */
+    HTS221_AVGT_256       = (uint8_t)0x38         /*!< Internal average on 256 samples */
 } HTS221_Avgt_et;
 #define IS_HTS221_AVGT(AVGT) ((AVGT == HTS221_AVGT_2) || (AVGT == HTS221_AVGT_4) || \
                               (AVGT == HTS221_AVGT_8) || (AVGT == HTS221_AVGT_16) || \
@@ -137,12 +135,11 @@ typedef enum
 /**
 * @brief  Output data rate configuration.
 */
-typedef enum
-{
-  HTS221_ODR_ONE_SHOT  = (uint8_t)0x00,         /*!< Output Data Rate: one shot */
-  HTS221_ODR_1HZ       = (uint8_t)0x01,         /*!< Output Data Rate: 1Hz */
-  HTS221_ODR_7HZ       = (uint8_t)0x02,         /*!< Output Data Rate: 7Hz */
-  HTS221_ODR_12_5HZ    = (uint8_t)0x03,         /*!< Output Data Rate: 12.5Hz */
+typedef enum {
+    HTS221_ODR_ONE_SHOT  = (uint8_t)0x00,         /*!< Output Data Rate: one shot */
+    HTS221_ODR_1HZ       = (uint8_t)0x01,         /*!< Output Data Rate: 1Hz */
+    HTS221_ODR_7HZ       = (uint8_t)0x02,         /*!< Output Data Rate: 7Hz */
+    HTS221_ODR_12_5HZ    = (uint8_t)0x03,         /*!< Output Data Rate: 12.5Hz */
 } HTS221_Odr_et;
 #define IS_HTS221_ODR(ODR) ((ODR == HTS221_ODR_ONE_SHOT) || (ODR == HTS221_ODR_1HZ) || \
                             (ODR == HTS221_ODR_7HZ) || (ODR == HTS221_ODR_12_5HZ))
@@ -151,48 +148,44 @@ typedef enum
 /**
 * @brief  Push-pull/Open Drain selection on DRDY pin.
 */
-typedef enum
-{
-  HTS221_PUSHPULL   = (uint8_t)0x00,   /*!< DRDY pin in push pull */
-  HTS221_OPENDRAIN  = (uint8_t)0x40    /*!< DRDY pin in open drain */
+typedef enum {
+    HTS221_PUSHPULL   = (uint8_t)0x00,   /*!< DRDY pin in push pull */
+    HTS221_OPENDRAIN  = (uint8_t)0x40    /*!< DRDY pin in open drain */
 } HTS221_OutputType_et;
 #define IS_HTS221_OutputType(MODE) ((MODE == HTS221_PUSHPULL) || (MODE == HTS221_OPENDRAIN))
 
 /**
 * @brief  Active level of DRDY pin.
 */
-typedef enum
-{
-  HTS221_HIGH_LVL   = (uint8_t)0x00,   /*!< HIGH state level for DRDY pin */
-  HTS221_LOW_LVL    = (uint8_t)0x80    /*!< LOW state level for DRDY pin */
+typedef enum {
+    HTS221_HIGH_LVL   = (uint8_t)0x00,   /*!< HIGH state level for DRDY pin */
+    HTS221_LOW_LVL    = (uint8_t)0x80    /*!< LOW state level for DRDY pin */
 } HTS221_DrdyLevel_et;
 #define IS_HTS221_DrdyLevelType(MODE) ((MODE == HTS221_HIGH_LVL) || (MODE == HTS221_LOW_LVL))
 
 /**
 * @brief  Driver Version Info structure definition.
 */
-typedef struct
-{
-  uint8_t   Major;
-  uint8_t   Minor;
-  uint8_t   Point;
+typedef struct {
+    uint8_t   Major;
+    uint8_t   Minor;
+    uint8_t   Point;
 } HTS221_DriverVersion_st;
 
 
 /**
 * @brief  HTS221 Init structure definition.
 */
-typedef struct
-{
-  HTS221_Avgh_et        avg_h;            /*!< Humidity average */
-  HTS221_Avgt_et        avg_t;            /*!< Temperature average */
-  HTS221_Odr_et         odr;              /*!< Output data rate */
-  HTS221_State_et       bdu_status;       /*!< HTS221_ENABLE/HTS221_DISABLE the block data update */
-  HTS221_State_et       heater_status;    /*!< HTS221_ENABLE/HTS221_DISABLE the internal heater */
+typedef struct {
+    HTS221_Avgh_et        avg_h;            /*!< Humidity average */
+    HTS221_Avgt_et        avg_t;            /*!< Temperature average */
+    HTS221_Odr_et         odr;              /*!< Output data rate */
+    HTS221_State_et       bdu_status;       /*!< HTS221_ENABLE/HTS221_DISABLE the block data update */
+    HTS221_State_et       heater_status;    /*!< HTS221_ENABLE/HTS221_DISABLE the internal heater */
 
-  HTS221_DrdyLevel_et   irq_level;        /*!< HTS221_HIGH_LVL/HTS221_LOW_LVL the level for DRDY pin */
-  HTS221_OutputType_et  irq_output_type;  /*!< Output configuration for DRDY pin */
-  HTS221_State_et       irq_enable;       /*!< HTS221_ENABLE/HTS221_DISABLE interrupt on DRDY pin */
+    HTS221_DrdyLevel_et   irq_level;        /*!< HTS221_HIGH_LVL/HTS221_LOW_LVL the level for DRDY pin */
+    HTS221_OutputType_et  irq_output_type;  /*!< Output configuration for DRDY pin */
+    HTS221_State_et       irq_enable;       /*!< HTS221_ENABLE/HTS221_DISABLE interrupt on DRDY pin */
 } HTS221_Init_st;
 
 /**
@@ -451,47 +444,47 @@ typedef struct
 * @{
 */
 
-HTS221_Error_et HTS221_read_reg( void *handle, uint8_t RegAddr, uint16_t NumByteToRead, uint8_t *Data );
-HTS221_Error_et HTS221_write_reg( void *handle, uint8_t RegAddr, uint16_t NumByteToWrite, uint8_t *Data );
+HTS221_Error_et HTS221_read_reg(void *handle, uint8_t RegAddr, uint16_t NumByteToRead, uint8_t *Data);
+HTS221_Error_et HTS221_write_reg(void *handle, uint8_t RegAddr, uint16_t NumByteToWrite, uint8_t *Data);
 
-HTS221_Error_et HTS221_Get_DriverVersion(HTS221_DriverVersion_st* version);
-HTS221_Error_et HTS221_Get_DeviceID(void *handle, uint8_t* deviceid);
+HTS221_Error_et HTS221_Get_DriverVersion(HTS221_DriverVersion_st *version);
+HTS221_Error_et HTS221_Get_DeviceID(void *handle, uint8_t *deviceid);
 
-HTS221_Error_et HTS221_Set_InitConfig(void *handle, HTS221_Init_st* pxInit);
-HTS221_Error_et HTS221_Get_InitConfig(void *handle, HTS221_Init_st* pxInit);
+HTS221_Error_et HTS221_Set_InitConfig(void *handle, HTS221_Init_st *pxInit);
+HTS221_Error_et HTS221_Get_InitConfig(void *handle, HTS221_Init_st *pxInit);
 HTS221_Error_et HTS221_DeInit(void *handle);
-HTS221_Error_et HTS221_IsMeasurementCompleted(void *handle, HTS221_BitStatus_et* Is_Measurement_Completed);
+HTS221_Error_et HTS221_IsMeasurementCompleted(void *handle, HTS221_BitStatus_et *Is_Measurement_Completed);
 
-HTS221_Error_et HTS221_Get_Measurement(void *handle, uint16_t* humidity, int16_t* temperature);
-HTS221_Error_et HTS221_Get_RawMeasurement(void *handle, int16_t* humidity, int16_t* temperature);
-HTS221_Error_et HTS221_Get_Humidity(void *handle, uint16_t* value);
-HTS221_Error_et HTS221_Get_HumidityRaw(void *handle, int16_t* value);
-HTS221_Error_et HTS221_Get_TemperatureRaw(void *handle, int16_t* value);
-HTS221_Error_et HTS221_Get_Temperature(void *handle, int16_t* value);
-HTS221_Error_et HTS221_Get_DataStatus(void *handle, HTS221_BitStatus_et* humidity, HTS221_BitStatus_et* temperature);
+HTS221_Error_et HTS221_Get_Measurement(void *handle, uint16_t *humidity, int16_t *temperature);
+HTS221_Error_et HTS221_Get_RawMeasurement(void *handle, int16_t *humidity, int16_t *temperature);
+HTS221_Error_et HTS221_Get_Humidity(void *handle, uint16_t *value);
+HTS221_Error_et HTS221_Get_HumidityRaw(void *handle, int16_t *value);
+HTS221_Error_et HTS221_Get_TemperatureRaw(void *handle, int16_t *value);
+HTS221_Error_et HTS221_Get_Temperature(void *handle, int16_t *value);
+HTS221_Error_et HTS221_Get_DataStatus(void *handle, HTS221_BitStatus_et *humidity, HTS221_BitStatus_et *temperature);
 HTS221_Error_et HTS221_Activate(void *handle);
 HTS221_Error_et HTS221_DeActivate(void *handle);
 
 HTS221_Error_et HTS221_Set_AvgHT(void *handle, HTS221_Avgh_et avgh, HTS221_Avgt_et avgt);
 HTS221_Error_et HTS221_Set_AvgH(void *handle, HTS221_Avgh_et avgh);
 HTS221_Error_et HTS221_Set_AvgT(void *handle, HTS221_Avgt_et avgt);
-HTS221_Error_et HTS221_Get_AvgHT(void *handle, HTS221_Avgh_et* avgh, HTS221_Avgt_et* avgt);
+HTS221_Error_et HTS221_Get_AvgHT(void *handle, HTS221_Avgh_et *avgh, HTS221_Avgt_et *avgt);
 HTS221_Error_et HTS221_Set_BduMode(void *handle, HTS221_State_et status);
-HTS221_Error_et HTS221_Get_BduMode(void *handle, HTS221_State_et* status);
+HTS221_Error_et HTS221_Get_BduMode(void *handle, HTS221_State_et *status);
 HTS221_Error_et HTS221_Set_PowerDownMode(void *handle, HTS221_BitStatus_et status);
-HTS221_Error_et HTS221_Get_PowerDownMode(void *handle, HTS221_BitStatus_et* status);
+HTS221_Error_et HTS221_Get_PowerDownMode(void *handle, HTS221_BitStatus_et *status);
 HTS221_Error_et HTS221_Set_Odr(void *handle, HTS221_Odr_et odr);
-HTS221_Error_et HTS221_Get_Odr(void *handle, HTS221_Odr_et* odr);
+HTS221_Error_et HTS221_Get_Odr(void *handle, HTS221_Odr_et *odr);
 HTS221_Error_et HTS221_MemoryBoot(void *handle);
 HTS221_Error_et HTS221_Set_HeaterState(void *handle, HTS221_State_et status);
-HTS221_Error_et HTS221_Get_HeaterState(void *handle, HTS221_State_et* status);
+HTS221_Error_et HTS221_Get_HeaterState(void *handle, HTS221_State_et *status);
 HTS221_Error_et HTS221_StartOneShotMeasurement(void *handle);
 HTS221_Error_et HTS221_Set_IrqActiveLevel(void *handle, HTS221_DrdyLevel_et status);
-HTS221_Error_et HTS221_Get_IrqActiveLevel(void *handle, HTS221_DrdyLevel_et* status);
+HTS221_Error_et HTS221_Get_IrqActiveLevel(void *handle, HTS221_DrdyLevel_et *status);
 HTS221_Error_et HTS221_Set_IrqOutputType(void *handle, HTS221_OutputType_et value);
-HTS221_Error_et HTS221_Get_IrqOutputType(void *handle, HTS221_OutputType_et* value);
+HTS221_Error_et HTS221_Get_IrqOutputType(void *handle, HTS221_OutputType_et *value);
 HTS221_Error_et HTS221_Set_IrqEnable(void *handle, HTS221_State_et status);
-HTS221_Error_et HTS221_Get_IrqEnable(void *handle, HTS221_State_et* status);
+HTS221_Error_et HTS221_Get_IrqEnable(void *handle, HTS221_State_et *status);
 
 /**
 * @}
